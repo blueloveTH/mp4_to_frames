@@ -489,10 +489,11 @@
           zipping.value = true;
           try {
             const zip = new JSZip();
+            const digits = String(frames.value.length).length;
             for (let i = 0; i < frames.value.length; i++) {
               const dataUrl = frames.value[i];
               const base64 = dataUrl.split(',')[1];
-              zip.file(`${i + 1}.png`, base64, { base64: true });
+              zip.file(`${String(i + 1).padStart(digits, '0')}.png`, base64, { base64: true });
             }
             const blob = await zip.generateAsync({ type: 'blob' });
             const a = document.createElement('a');
